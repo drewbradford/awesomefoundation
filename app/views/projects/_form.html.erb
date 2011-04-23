@@ -1,0 +1,34 @@
+<% form_for(@project, :html => { :multipart => true }) do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :url %><br />
+    <%= f.text_field :url %>
+  </p>
+  <p>
+    <%= f.label :status %><br />
+    <%= f.select :status, options_for_select( Project::STATUSES ) %>
+  </p>
+  <p>
+    <%= f.label :funded_at %><br />
+    <%= f.date_select :funded_at %>
+  </p>
+  <p>
+    <%= f.label :chapter_id %><br />
+    <%= f.select :chapter_id, options_for_select( Chapter.find(:all).map { |chapter| [chapter.name, chapter.id] } ) %>
+  </p>
+  <p>
+    <%= f.label :photo %>
+    <%= f.file_field :photo %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
