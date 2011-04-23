@@ -33,12 +33,30 @@
     <ul id="projects">
     <% @projects.each do |project| %>
       <li class="projects">
-        <%= h project.title %>
+        <%= link_to project.title, project %>
+        <% if current_user && current_user.admin? %>
+          <%= link_to 'Edit', edit_project_path(project) %>
+        <% end %>
       </li>
     <% end %>
     </ul>  
   <% else %>
     <p>No projects have been announced yet. Stay tuned.</p>
+  <% end %>
+  
+  <% if @unannounced_projects && @unannounced_projects.size > 0 %>
+    <ul id="projects">
+    <% @unannounced_projects.each do |project| %>
+      <li class="projects">
+        <%= link_to project.title, project %> (Unannounced)
+        <%= link_to 'Edit', edit_project_path(project) %>
+      </li>
+    <% end %>
+    </ul>  
+  <% end %>
+  
+  <% if current_user && current_user.admin? %>
+  <p><%= link_to "Add new project...", new_project_path %></p>
   <% end %>
 
 

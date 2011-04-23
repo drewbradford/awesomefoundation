@@ -10,6 +10,7 @@ class ChaptersController < ApplicationController
     @chapter = Chapter.find_by_slug(params[:id]) or raise ActiveRecord::RecordNotFound
     @trustees = @chapter.trustees.all(:order => "users.first_name asc")
     @projects = @chapter.projects.announced
+    @unannounced_projects = @chapter.projects.unannounced if current_user && current_user.admin?
   end
   
   def new
