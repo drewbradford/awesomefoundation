@@ -51,14 +51,11 @@ The seed data sets up a fictional Awesome Foundation chapter called Atlantis
 with a single administrator account whose username is `poseidon` with
 password `password`.
 
-After that, edit the `config/secrets.yml` file and fill it with something
-like this:
+After that, do:
 
-    username: test
-    password: test
+    $ cp config/secrets.yml.dist config/secrets.yml
 
-You can use this username and password to get past HTTP Basic Authentication
-that some endpoints present you with, such as `/submissions`.
+Then edit `config/secrets.yml` as needed.
 
 Finally you can run the WEBrick server:
 
