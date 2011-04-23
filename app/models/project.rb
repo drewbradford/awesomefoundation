@@ -8,10 +8,10 @@ class Project < ActiveRecord::Base
   validates_presence_of :title
   validates_presence_of :funded_at
   validates_presence_of :description
+  validates_attachment_presence :photo, :if => Proc.new { |project| project.status == 'announced' }
   
   validates_inclusion_of :status, :in => STATUSES, :allow_nil => false
   
   named_scope :unannounced, :conditions => { :status => 'unannounced' }
   named_scope :announced, :conditions => { :status => 'announced' }
-  
 end
