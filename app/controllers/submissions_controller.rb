@@ -62,6 +62,7 @@ class SubmissionsController < ApplicationController
       format.html do
         @submissions = submissions.paginate(:page => params[:page], :per_page => 50)
       end
+      format.json { render :json => submissions }
       # format.xls do
       #   Spreadsheet.client_encoding = "UTF-8//TRANSLIT//IGNORE"
       #   book = Spreadsheet::Workbook.new
