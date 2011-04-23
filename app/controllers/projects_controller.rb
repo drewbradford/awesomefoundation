@@ -6,7 +6,6 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @projects }
     end
   end
 
@@ -17,7 +16,6 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @project }
     end
   end
 
@@ -28,7 +26,6 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @project }
     end
   end
 
@@ -46,10 +43,8 @@ class ProjectsController < ApplicationController
       if @project.save
         flash[:notice] = 'Project was successfully created.'
         format.html { redirect_to(@project) }
-        format.xml  { render :xml => @project, :status => :created, :location => @project }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @project.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -63,10 +58,8 @@ class ProjectsController < ApplicationController
       if @project.update_attributes(params[:project])
         flash[:notice] = 'Project was successfully updated.'
         format.html { redirect_to(@project) }
-        format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @project.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -79,7 +72,6 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(projects_url) }
-      format.xml  { head :ok }
     end
   end
 end
