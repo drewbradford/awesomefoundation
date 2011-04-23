@@ -47,6 +47,9 @@ Now let rake set up the databases and tables and seed data:
     $ rake db:setup
     $ rake db:seed
 
+The seed data sets up a fictional Awesome Foundation chapter called Atlantis
+with a single account whose username is `poseidon` with password `password`.
+
 After that, edit the `config/secrets.yml` file and fill it with something
 like this:
 
