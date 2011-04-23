@@ -11,6 +11,7 @@ This is the source code for the Awesome Foundation's website at [awesomefoundati
 * mysql
 * gem
 * ruby mysql bindings
+* paperclip
 * rails (v 2.3.5)
 
 To get Rails version 2.3.5, you can run:
@@ -28,6 +29,7 @@ You'll then want to install the Rails gem (described above), rather than
 installing it via `apt-get`. Once you've done that, run:
 
     sudo ln -s /var/lib/gems/1.8/gems/rake-0.8.7/bin/rake /usr/bin/rake
+    sudo gem install paperclip --no-ri --no-rdoc
 
 ## Installation ##
 
@@ -51,14 +53,11 @@ The seed data sets up a fictional Awesome Foundation chapter called Atlantis
 with a single administrator account whose username is `poseidon` with
 password `password`.
 
-After that, edit the `config/secrets.yml` file and fill it with something
-like this:
+After that, do:
 
-    username: test
-    password: test
+    $ cp config/secrets.yml.dist config/secrets.yml
 
-You can use this username and password to get past HTTP Basic Authentication
-that some endpoints present you with, such as `/submissions`.
+Then edit `config/secrets.yml` as needed.
 
 Finally you can run the WEBrick server:
 

@@ -42,7 +42,8 @@ ActionController::Routing::Routes.draw do |map|
       home.send(page.to_sym, page, :action => page)
     end
   end
-  map.resources :users, :sessions, :chapters, :submissions, :projects
+  map.resources :sessions, :chapters, :submissions, :projects
+  map.resources :users, :collection => {:search => :get}
 
   map.with_options :controller => "sessions" do |sessions|
     sessions.login "login", :action => "new"

@@ -10,7 +10,22 @@ class UsersController < ApplicationController
     @chapters = Chapter.find(:all, :include => [:trustees])
     @orphans  = User.orphaned
   end
-  
+
+  def search
+    name = params[:twitter_username]
+    @results = User.find_all_by_twitter_username(name).map do |row|
+      {:id => row[:id],
+       :twitter_username => row[:twitter_username],
+       :first_name => row[:first_name],
+       :last_name => row[:last_name]}
+    end
+    respond_to do |format|
+      format.json do
+        render :json => @results
+      end
+    end
+  end
+
   def new
     @user = User.new
   end
