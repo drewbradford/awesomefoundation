@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101114013221) do
+ActiveRecord::Schema.define(:version => 20110423204208) do
 
   create_table "chapters", :force => true do |t|
     t.string "name"
@@ -17,6 +17,19 @@ ActiveRecord::Schema.define(:version => 20101114013221) do
     t.text   "body"
     t.string "tagline"
   end
+
+  create_table "projects", :force => true do |t|
+    t.string   "title",       :null => false
+    t.string   "url"
+    t.string   "status",      :null => false
+    t.date     "funded_at",   :null => false
+    t.integer  "chapter_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "description", :null => false
+  end
+
+  add_index "projects", ["chapter_id", "status", "funded_at"], :name => "index_projects_on_chapter_id_and_status_and_funded_at"
 
   create_table "submissions", :force => true do |t|
     t.string   "name"
