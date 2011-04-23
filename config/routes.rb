@@ -1,4 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :projects
+
+  map.resources :projects
+
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
@@ -38,7 +42,7 @@ ActionController::Routing::Routes.draw do |map|
       home.send(page.to_sym, page, :action => page)
     end
   end
-  map.resources :users, :sessions, :chapters, :submissions
+  map.resources :users, :sessions, :chapters, :submissions, :projects
 
   map.with_options :controller => "sessions" do |sessions|
     sessions.login "login", :action => "new"

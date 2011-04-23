@@ -27,6 +27,22 @@
   <% end %>
   </ul>  
 
+  <h2><%=h @chapter.name %> Projects</h2>
+  
+  <% if @projects.size > 0 %>
+    <ul id="projects">
+    <% @projects.each do |project| %>
+      <li class="projects">
+        <%= h project.title %>
+      </li>
+    <% end %>
+    </ul>  
+  <% else %>
+    <p>No projects have been announced yet. Stay tuned.</p>
+  <% end %>
+
+
+
 </div>
 
 <% content_for :footer do %>

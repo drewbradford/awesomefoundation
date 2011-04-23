@@ -1,0 +1,33 @@
+<p>
+  <b>Title:</b>
+  <%=h @project.title %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%=h @project.url %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%=h @project.status %>
+</p>
+
+<p>
+  <b>Funded at:</b>
+  <%=h @project.funded_at %>
+</p>
+
+<p>
+  <b>Chapter:</b>
+  <%=h @project.chapter_id %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @project.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>
