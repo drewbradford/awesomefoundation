@@ -1,4 +1,5 @@
 class Project < ActiveRecord::Base
+  has_attached_file :photo, :styles => {:thumb => '50x50>'}
   
   STATUSES = %w( unannounced announced )
   
