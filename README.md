@@ -11,12 +11,13 @@ This is the source code for the Awesome Foundation's website at [awesomefoundati
 * mysql
 * gem
 * ruby mysql bindings
-* paperclip
-* rails (v 2.3.5)
+* paperclip (and ImageMagick)
+* comma
+* rails (v 2.3.11)
 
-To get Rails version 2.3.5, you can run:
+To get Rails version 2.3.11, you can run:
 
-    $ sudo gem install -v=2.3.5 rails --no-ri --no-rdoc
+    $ sudo gem install -v=2.3.11 rails --no-ri --no-rdoc
 
 ### Ubuntu
  
