@@ -38,10 +38,10 @@ class Submission < ActiveRecord::Base
       # Search for submission by chapter_id
       # and possibly exclude unspecified chapters
       if params[:chapter_id].to_i > 0
-        if params[:exclude_unspecified].blank?
+        unless params[:exclude_unspecified].blank?
           conditions << ['chapter_id = ?', params[:chapter_id]]
         else
-          conditions << ['chapter_id = ? OR chapter_id IS NOT NULL', params[:chapter_id]]
+          conditions << ['(chapter_id = ? OR chapter_id IS NULL)', params[:chapter_id]]
         end
       elsif !params[:exclude_unspecified].blank?
         conditions << ['chapter_id IS NOT NULL']
