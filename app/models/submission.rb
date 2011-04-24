@@ -1,5 +1,4 @@
 class Submission < ActiveRecord::Base
-
   belongs_to :chapter
 
   [:name, :email, :title, :description, :use].each do |field|
@@ -80,6 +79,4 @@ class Submission < ActiveRecord::Base
       self[field].gsub!(/\r\n/, "\n") if self[field]
     end
   end
-
 end
-
