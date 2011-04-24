@@ -18,7 +18,7 @@ $(".submission .name a").tipsy({ fade: true, gravity: "w" }).click(function() {
   
   <% form_tag request.path, :id => "submissions_filter", :method => :get do %>
     Submissions for
-    <%= select_tag :period, options_for_select(@period_options, @period) %>
+    <%= select_tag :period, options_for_select(@period_options, params[:period]) %>
     <%= select_tag :chapter_id, options_for_select([["- Any -", ""]]) + options_from_collection_for_select(@chapters, :id, :name, params[:chapter_id].to_i) %>
     <%= check_box_tag :exclude_unspecified, "1", params[:exclude_unspecified] %>
     <%= label_tag :exclude_unspecified, "Exclude unspecified?" %>
