@@ -6,7 +6,7 @@ class SubmissionsController < ApplicationController
     @chapters         = Chapter.alphabetical
     @period_options   = Submission.valid_periods
 
-    params[:period] ||= Awesome::Month.new.iso
+    params[:period] ||= Awesome::Month.this_month.iso
     @all_submissions  = Submission.search(params)
 
     @submissions     = @all_submissions.paginate(:page => params[:page], :per_page => 50)
