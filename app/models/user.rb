@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  API_FIELDS = "id, twitter_username, facebook_url, linkedin_url, first_name, last_name"
   
   attr_protected :admin
 

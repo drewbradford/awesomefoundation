@@ -12,13 +12,8 @@ class UsersController < ApplicationController
   end
 
   def search
-    name = params[:twitter_username]
-    @results = User.find_all_by_twitter_username(name).map do |row|
-      {:id => row[:id],
-       :twitter_username => row[:twitter_username],
-       :first_name => row[:first_name],
-       :last_name => row[:last_name]}
-    end
+    @results = User.find_all_by_twitter_username(params[:twitter_username], :select => User::API_FIELDS).map(&:attributes)
+
     respond_to do |format|
       format.json do
         render :json => @results
