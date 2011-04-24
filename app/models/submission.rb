@@ -20,6 +20,18 @@ class Submission < ActiveRecord::Base
   validates_url_format_of :url, :message => "^URL is invalid", :allow_blank => true
   validates_inclusion_of :chapter_id, :in => Chapter.all.map(&:id), :allow_nil => true
 
+  #CSV support
+  comma do
+    chapter :name => 'Chapter'
+    name
+    title
+    description
+    use
+    url 'URL'
+    email
+    phone
+  end
+
   class << self
     def valid_periods
       first_month   = Awesome::Month.new self.minimum('created_at')
