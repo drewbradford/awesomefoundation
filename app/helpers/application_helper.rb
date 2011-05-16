@@ -23,3 +23,14 @@ module ApplicationHelper
   end
   
 end
+
+# TODO: optional options hash for input/textarea attributes, CSS style name (should this be a param or go elsewhere?)
+class SubmissionFormBuilder < ActionView::Helpers::FormBuilder
+  def contact_info_text_field(object, message)
+    "<input class=\"contact_info_text_field\" name=\"#{object}\" value=\"#{message}\" onfocus=\"javascript: this.value=''\"/>"
+  end
+
+  def project_info_text_field(object, message)
+    "<textarea class=\"project_info_text_field\" name=\"#{object}\" onfocus=\"javascript: this.value=''\">#{message}</textarea>"
+  end
+end

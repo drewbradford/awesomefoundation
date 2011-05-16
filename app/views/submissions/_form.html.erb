@@ -1,83 +1,97 @@
+<!-- put this in a javascript render page... there's a Rails way to do this but not sure what it is yet -->
+<script type="text/javascript">
+    var tracker = function() {
+        var which = 0; // track which section the user's working on
+    }
+</script>
+
+<h3 class="awesome_project">Do you have an awesome project?</h3>
+
 <%= show_flash %>
 <%= error_messages @submission %>
-<% form_for @submission do |f| %>
-<ul>
-  
-<li class="input">
-<%= f.label :chapter_id, "Chapter" %>
-<%= f.select :chapter_id, options_from_collection_for_select(@chapters, :id, :name, @submission.chapter_id), { :include_blank => "- Any -" } %>
-<span class="hint">Want to apply to a specific chapter? Note that preference is often given to local submissions.</span> 
-</li>
+<% form_for @submission, :builder => SubmissionFormBuilder do |f| %>
+    <div id="awesomecheckbox">
 
-<li class="input">
-<%= f.label :name %>
-<%= f.text_field :name %>
-</li>
+      <input type="checkbox" onclick="javascript:showOrHideNext(this.parent, this.checked)"> Yes, my project is awesome!
 
-<li class="input">
-<%= f.label :email %>
-<%= f.text_field :email %>
-</li>
+    </div>
 
-<li class="input">
-<%= f.label :phone %>
-<%= f.text_field :phone %>
-<span class="hint">(optional)</span>
-</li>
+    <div id="forminfo"><!-- this must be formatted initially as greyed out -->
+        <h4>Great!  Tell us all about it.</h4>
 
-<li class="input">
-<%= f.label :url, "URL" %>
-<%= f.text_field :url %>
-<span class="hint">(optional)</span>
-</li>
+        <div id="contactinfo">
+            <p>Let's start out with the basics, like your name, your contact info, etc.</p>
 
-<li class="input">
-<%= f.label :title %>
-<%= f.text_field :title %>
-<span class="hint">Give your project a descriptive title. Don't sweat this too much. It's mostly to help us review the submissions.<br />(<span id="submission_title_counter">50 characters remaining</span>)</span></span>
-</li>
+            <p class="input">
+                <%= f.contact_info_text_field :name, "Your name" %>
+            </p>
 
-<li class="input">
-<%= f.label :description, "Describe yourself, your project, and how you'll pull it off" %>
-<%= f.text_area :description %>
-<span class="hint">What makes your project awesome and you the right person to do it? If you've done awesome stuff in the past, it wouldn't hurt to mention it. But be pithy; we have short attention spans.<br />(<span id="submission_description_counter">2500 characters remaining</span>)</span>
-</li>
+            <p class="input">
+                <%= f.contact_info_text_field :email, "youremail@address.com" %>
+            </p>
 
-<li class="input">
-<%= f.label :use, "How would you use the money?" %>
-<%= f.text_area :use %>
-<span class="hint">We won't rule out giving you money just for being awesome. But preference will be given to those who need it. So tell us how you'll use the money.<br />(<span id="submission_use_counter">250 characters remaining</span>)</span>
-</li>
+            <p class="input">
+                <%= f.contact_info_text_field :phone, "Phone #" %>
+                <span class="hint">(optional)</span>
+            </p>
 
-<li class="button">
-<%= f.submit "Apply" %>
-</li>
+            <p class="input">
+                <%= f.contact_info_text_field :url, "URL" %>
+                <span class="hint">(optional)</span>
+            </p>
+        </div>
 
-</ul>
+        <div id="projectinfo">
+            <p>Now, we want all the juicy details about your project.</p>
+
+            <p class="input">
+                <%= f.contact_info_text_field :title, "Project Title" %>
+                <span class="hint">(optional)</span>
+            </p>
+
+            <p class="input">
+                <%= f.project_info_text_field :description, "What is your project, and what makes it awesome?" %>
+                <span class="hint">(optional)</span>
+            </p>
+
+            <p class="input">
+                <%= f.project_info_text_field :use, "How would $1000 make the difference?" %>
+                <span class="hint">(optional)</span>
+            </p>
+        </div>
+
+        <p class="input">
+            <span class="hint">Select the city nearest to where your project will take place.</span><br/>
+            <%= f.select :chapter_id, options_from_collection_for_select(@chapters, :id, :name, @submission.chapter_id), {:include_blank => "- Any -"} %>
+        </p>
+
+        <%= f.submit "Submit" %>
+
+    </div>
 <% end %>
 
 <% content_for :footer do %>
-<%= javascript_include_tag "jquery.charcounter" %>
-<script>
-$(document).ready(function() {
-  $("#submission_title").charCounter(50, {
-  	container: "#submission_title_counter",
-  	format: "%1 characters remaining",
-  	pulse: false,
-  	delay: 100
-	})  
-  $("#submission_description").charCounter(2500, {
-  	container: "#submission_description_counter",
-  	format: "%1 characters remaining",
-  	pulse: false,
-  	delay: 100
-	})  
-  $("#submission_use").charCounter(500, {
-  	container: "#submission_use_counter",
-  	format: "%1 characters remaining",
-  	pulse: false,
-  	delay: 100
-	})  
-})
-</script>
+    <%= javascript_include_tag "jquery.charcounter" %>
+    <script>
+        $(document).ready(function() {
+            $("#submission_title").charCounter(50, {
+                container: "#submission_title_counter",
+                format: "%1 characters remaining",
+                pulse: false,
+                delay: 100
+            })
+            $("#submission_description").charCounter(2500, {
+                container: "#submission_description_counter",
+                format: "%1 characters remaining",
+                pulse: false,
+                delay: 100
+            })
+            $("#submission_use").charCounter(500, {
+                container: "#submission_use_counter",
+                format: "%1 characters remaining",
+                pulse: false,
+                delay: 100
+            })
+        })
+    </script>
 <% end %>
