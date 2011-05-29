@@ -28,8 +28,12 @@ class SubmissionsController < ApplicationController
     @chapters   = Chapter.alphabetical
     @submission = Submission.new(params[:submission])
     if @submission.save
+      # Send the confirmation email
+      Notifier.deliver_submission_notification(@submission)
+
       flash[:notice] = "Thanks! We've received your submission and will review it shortly. Hopefully you'll hear from us soon. But if not, don't fret. You can always submit more awesome ideas!"
       redirect_to new_submission_path
+
     else
       render :action => "new"
     end

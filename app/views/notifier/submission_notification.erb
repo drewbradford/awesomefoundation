@@ -1,0 +1,26 @@
+Hi <%= @submission.name %>,
+
+We just wanted to send you this (automated) email to let you know that we have received your Awesome Foundation application. Unfortunately, we are not able to personally respond to all of our applicants, but be sure to follow our Twitter account at http://twitter.com/awesomefound and our blog at http://awesomefoundation.org/blog/ for information about grants from all of our chapters as well as future application deadlines.
+
+Thanks for your interest in the Awesome Foundation!
+
+
+### For your reference, your application is below ###
+
+<%= @submission.title %>
+By <%= @submission.name %> (<%= @submission.email %>)
+<% unless @submission.phone.blank? %>Phone: <%= @submission.phone %><% end -%>
+<% unless @submission.url.blank? %>URL: <%= @submission.url %><% end -%>
+
+Chapter: <%= @submission.chapter.try(:name) || "Any Chapter" %>
+Received: <%= @submission.created_at %>
+
+Project Description:
+
+<%= @submission.description %>
+
+How you would use the money:
+
+<%= @submission.use %>
+
+### That's it! Thanks again! ###
