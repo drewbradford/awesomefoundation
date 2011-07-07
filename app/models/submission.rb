@@ -29,6 +29,7 @@ class Submission < ActiveRecord::Base
     url 'URL'
     email
     phone
+    created_at 'Date'
   end
 
   class << self
