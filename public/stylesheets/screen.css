@@ -297,6 +297,11 @@ a.comments_permalink {
   float: right;
 }
 
+img.alignleft {
+  float: left;
+  margin-right: 10px;
+}
+
 /** SUBMISSIONS **/
 
 .submission {
