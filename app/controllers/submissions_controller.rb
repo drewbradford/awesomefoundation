@@ -3,10 +3,12 @@ class SubmissionsController < ApplicationController
   before_filter :authenticate, :only => :index
 
   def index
+    # Ensure that we are searching over some date range
+    params[:period_start] ||= Awesome::Month.this_month.iso
+    params[:period_end]   ||= params[:period_end]
+
     @chapters         = Chapter.alphabetical
     @period_options   = Submission.valid_periods
-
-    params[:period] ||= Awesome::Month.this_month.iso
     @all_submissions  = Submission.search(params)
 
     @submissions     = @all_submissions.paginate(:page => params[:page], :per_page => 50)

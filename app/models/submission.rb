@@ -59,8 +59,12 @@ class Submission < ActiveRecord::Base
         conditions << ['chapter_id IS NOT NULL']
       end
 
-      conditions << ['created_at >= ? AND created_at < ?', Awesome::Month.parse(params[:period]).iso, Awesome::Month.parse(params[:period]).next.iso] unless params[:period].blank?
+      # If we don't have an end date, default to the same as the start date
+      params[:period_end] ||= params[:period_start]
 
+      if params[:period_start].present?
+        conditions << ['created_at >= ? AND created_at < ?', Awesome::Month.parse(params[:period_start]).iso, Awesome::Month.parse(params[:period_end]).next.iso]
+      end
 
       self.scoped(:conditions => conditions.map { |c| send(:sanitize_sql_array, c)}.join(' AND '), :order => 'created_at DESC')
     end
