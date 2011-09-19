@@ -2,13 +2,16 @@
 <%= error_messages @submission %>
 <% form_for @submission do |f| %>
 <ul>
-  
+
+<fieldset>
 <li class="input">
 <%= f.label :chapter_id, "Chapter" %>
 <%= f.select :chapter_id, options_from_collection_for_select(@chapters, :id, :name, @submission.chapter_id), { :include_blank => "- Any -" } %>
 <span class="hint">Want to apply to a specific chapter? Note that preference is often given to local submissions.</span> 
 </li>
+</fieldset>
 
+<fieldset id="submission_fields">
 <li class="input">
 <%= f.label :name %>
 <%= f.text_field :name %>
@@ -52,6 +55,12 @@
 <li class="button">
 <%= f.submit "Apply" %>
 </li>
+</fieldset>
+
+<div id="alternate_form" style="display:none">
+  <p>Note: this Awesome Foundation chapter accepts submissions via their own submission form.</p>
+  <p><a href="#" id="alternate_form_link">Take me to this form now &rarr;</a></p>
+</div>
 
 </ul>
 <% end %>
@@ -59,7 +68,28 @@
 <% content_for :footer do %>
 <%= javascript_include_tag "jquery.charcounter" %>
 <script>
+var chapter_form_urls = <%= @submission_urls.to_json %>;
+
+function displayAlternateForm() {
+  chapter_id = $("#submission_chapter_id").val();
+
+  if (chapter_form_urls[chapter_id] == undefined) {
+    $("#submission_fields").show();
+    $("#alternate_form").hide();
+  } else {
+    $("#submission_fields").hide();
+    $("#alternate_form").show();
+    $("#alternate_form_link").attr('href', chapter_form_urls[chapter_id]);
+  }
+}
+
 $(document).ready(function() {
+  displayAlternateForm();
+
+  $("#submission_chapter_id").change(function() {
+    displayAlternateForm();
+  });
+
   $("#submission_title").charCounter(50, {
   	container: "#submission_title_counter",
   	format: "%1 characters remaining",
@@ -77,7 +107,7 @@ $(document).ready(function() {
   	format: "%1 characters remaining",
   	pulse: false,
   	delay: 100
-	})  
+	})
 })
 </script>
 <% end %>

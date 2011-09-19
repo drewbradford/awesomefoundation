@@ -21,14 +21,16 @@ class SubmissionsController < ApplicationController
   end
 
   def new
-    @chapters   = Chapter.alphabetical
+    setup_edit_data
+
     @submission = Submission.new
+
     @submission.chapter = Chapter.find_by_slug(params[:chapter]) if params[:chapter]
   end
 
   def create
-    @chapters   = Chapter.alphabetical
     @submission = Submission.new(params[:submission])
+
     if @submission.save
       # Send the confirmation email
       Notifier.deliver_submission_notification(@submission)
@@ -37,8 +39,17 @@ class SubmissionsController < ApplicationController
       redirect_to new_submission_path
 
     else
+      setup_edit_data
+
       render :action => "new"
     end
+  end
+
+  protected
+
+  def setup_edit_data
+    @chapters        = Chapter.alphabetical
+    @submission_urls = Chapter.submission_form_urls    
   end
 
 end

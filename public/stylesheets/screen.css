@@ -206,6 +206,11 @@ form textarea.pagebody {
   width: 100%;
 }
 
+form fieldset {
+  border: 0;
+  padding: 0;
+}
+
 #submission_use {
   height: 150px;
 }
@@ -350,3 +355,4 @@ img.alignleft {
 .pagination a, .pagination span {
   padding: 2px 4px;
 }
+
