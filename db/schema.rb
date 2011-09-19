@@ -9,14 +9,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110919021608) do
+ActiveRecord::Schema.define(:version => 20110919041015) do
 
   create_table "chapters", :force => true do |t|
     t.string "name"
     t.string "slug"
     t.text   "body"
     t.string "tagline"
-    t.text   "submission_form_url"
+    t.string "submission_form_url"
   end
 
   create_table "projects", :force => true do |t|
